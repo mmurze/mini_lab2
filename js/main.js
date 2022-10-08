@@ -1,7 +1,6 @@
 import {
   setFormValue, submitSignUpForm, validatePassword, validateEmail,
-  formValidation, getValidationStatus, formValues, validatePassword, submitSignInForm
-} from "./utils.js"
+  formValidation, formValues} from "./utils.js"
 
 // Выписываем все айдишники HTMl-элементов в константы для переиспользования
 const first_name_id = 'first_name'
@@ -49,19 +48,13 @@ password_repeat.oninput = (e) => {
 }
 
 
-passwordd.oninput = (e) =>{
-  if (/*formValidation.emaill && */emaill.value !== "" && passwordd.value !== ""){
-    document.getElementById('sign_in_btn').disabled  = false;
-  }
-  else document.getElementById('sign_in_btn').disabled = true;
+passwordd.oninput = (e) => {
+  document.getElementById('sign_in_btn').disabled = !(formValidation.emaill && emaill.value !== "" && passwordd.value !== "");
 }
 
 emaill.oninput = (e) =>{
   setFormValue(emaill_id, e.target.value, validateEmail)
-  if (/*formValidation.emaill && */emaill.value !== "" && passwordd.value !== ""){
-    document.getElementById(sign_in_btn_id).disabled = false;
-  }
-  else document.getElementById(sign_in_btn_id).disabled = true;
+  document.getElementById(sign_in_btn_id).disabled = !(formValidation.emaill && emaill.value !== "" && passwordd.value !== "");
 }
 
 
@@ -83,14 +76,14 @@ switch_to_sign_up.onclick = (e) => {
 
 // При нажатии кнопки в форме по умолчанию происходит перезагрузка страницы.
 // Чтобы отключить его, нужно отменить стандартное поведение события
-const sign_up_btn = document.getElementById(sign_up_btn_id);
-sign_up_btn.onclick = (e) => {
+const sign_in_btn = document.getElementById(sign_in_btn_id);
+sign_in_btn.onclick = (e) => {
   e.preventDefault()
   submitSignUpForm()
 }
 
-const sign_in_btn = document.getElementById(sign_in_btn_id);
-sign_in_btn.onclick = (e) => {
+const sign_up_btn = document.getElementById(sign_up_btn_id);
+sign_up_btn.onclick = (e) => {
   e.preventDefault()
-  submitSignInForm()
+  submitSignUpForm()
 }
